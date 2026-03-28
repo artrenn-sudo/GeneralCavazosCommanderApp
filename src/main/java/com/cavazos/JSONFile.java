@@ -11,12 +11,15 @@ public class JSONFile {
     JSONParser jsonParser = new JSONParser();
     JSONArray data = null;
 
-    try (InputStream is = JSONFile.class.getClassLoader().getResourceAsStream(fileName);
-         InputStreamReader reader = new InputStreamReader(is)) {
+    InputStream is = JSONFile.class.getClassLoader().getResourceAsStream(fileName);
+    if (is == null) {
+      System.err.println("File not found: " + fileName);
+      return data;
+    }
+
+    try (InputStreamReader reader = new InputStreamReader(is)) {
       Object obj = jsonParser.parse(reader);
       data = (JSONArray) obj;
-    } catch (FileNotFoundException e) {
-      e.printStackTrace();
     } catch (IOException e) {
       e.printStackTrace();
     } catch (ParseException e) {

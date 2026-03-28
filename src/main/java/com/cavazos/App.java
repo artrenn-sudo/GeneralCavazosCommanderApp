@@ -1,8 +1,9 @@
 package com.cavazos;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.Random;
 import java.util.Scanner;
-import java.util.Stack;
 import org.json.simple.*;
 
 public class App {
@@ -22,20 +23,22 @@ public class App {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        boolean running = true;
 
         // Load commands from JSON
         JSONArray commandJSONArray = JSONFile.readArray("commands.json");
         String[] commandArray = Cavazos.getCommandArray(commandJSONArray);
 
         Random rand = new Random();
-        Stack<String> undoStack = new Stack<>();
-        Stack<String> redoStack = new Stack<>();
+        Deque<String> undoStack = new ArrayDeque<>();
+        Deque<String> redoStack = new ArrayDeque<>();
 
-        while (running) {
+        String input;
+
+        // Menu loop: exits when user enters 'q'
+        do {
             printMenu();
             System.out.print("Enter a command: ");
-            String input = scanner.nextLine().trim().toLowerCase();
+            input = scanner.nextLine().trim().toLowerCase();
 
             switch (input) {
                 case "i":
@@ -67,14 +70,13 @@ public class App {
                     }
                     break;
                 case "q":
-                    running = false;
                     System.out.println("Goodbye, General!");
                     break;
                 default:
                     System.out.println("Invalid command. Please try again.");
                     break;
             }
-        }
+        } while (!input.equals("q"));
 
         scanner.close();
     }
