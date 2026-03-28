@@ -17,6 +17,7 @@ public class App {
         System.out.println("l\tList all of the commands");
         System.out.println("u\tUndo the last command that was issued");
         System.out.println("r\tRedo the last command that was issued");
+        System.out.println("m\tShow menu");
         System.out.println("q\tQuit");
         System.out.println("--------------------------------------------------------------");
     }
@@ -34,9 +35,11 @@ public class App {
 
         String input;
 
+        // Show menu once at startup
+        printMenu();
+
         // Menu loop: exits when user enters 'q'
         do {
-            printMenu();
             System.out.print("Enter a command: ");
             input = scanner.nextLine().trim().toLowerCase();
 
@@ -68,6 +71,9 @@ public class App {
                         undoStack.push(redone);
                         System.out.println("Redone: " + redone);
                     }
+                    break;
+                case "m":
+                    printMenu();
                     break;
                 case "q":
                     System.out.println("Goodbye, General!");
