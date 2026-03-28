@@ -1,6 +1,8 @@
 package com.cavazos;
 
+import java.util.Random;
 import java.util.Scanner;
+import java.util.Stack;
 import org.json.simple.*;
 
 public class App {
@@ -26,6 +28,9 @@ public class App {
         JSONArray commandJSONArray = JSONFile.readArray("commands.json");
         String[] commandArray = Cavazos.getCommandArray(commandJSONArray);
 
+        Random rand = new Random();
+        Stack<String> undoStack = new Stack<>();
+
         while (running) {
             printMenu();
             System.out.print("Enter a command: ");
@@ -33,7 +38,10 @@ public class App {
 
             switch (input) {
                 case "i":
-                    System.out.println("Issue command - not yet implemented");
+                    int randIndex = rand.nextInt(commandArray.length);
+                    String command = commandArray[randIndex];
+                    undoStack.push(command);
+                    System.out.println("Issued: " + command);
                     break;
                 case "l":
                     Cavazos.print(commandArray);
