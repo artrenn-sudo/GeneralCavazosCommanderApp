@@ -8,23 +8,23 @@ import org.json.simple.*;
 
 public class App {
 
-    private static final String line = "--------------------------------------------------------------";
+    private static final String lineBreak = "--------------------------------------------------------------";
     private static final Random rand = new Random();
     private static Deque<String> undoStack = new ArrayDeque<>();
     private static Deque<String> redoStack = new ArrayDeque<>();
 
     // Display the menu
     public static void printMenu() {
-        System.out.println(line);
+        System.out.println(lineBreak);
         System.out.println("General Cavazos Commander App");
-        System.out.println(line);
+        System.out.println(lineBreak);
         System.out.println("i\tIssue a command");
         System.out.println("l\tList all of the commands");
         System.out.println("u\tUndo the last command that was issued");
         System.out.println("r\tRedo the last command that was issued");
         System.out.println("m\tShow menu");
         System.out.println("q\tQuit");
-        System.out.println(line);
+        System.out.println(lineBreak);
     }
 
     // Issue a random command
@@ -100,7 +100,7 @@ public class App {
                     System.out.println("Invalid command. Please try again.");
                     break;
             }
-            System.out.println(line);
+            System.out.println(lineBreak);
         }
 
         scanner.close();
